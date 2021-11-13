@@ -19,7 +19,6 @@ def background():
 		try:
 			response = requests.get(url)
 			json_response = json.loads(response.text)
-			pprint(json_response)
 			for item in json_response["items"]:
 				video_id = item["id"]["videoId"]
 				title = item["snippet"]["title"]
@@ -42,6 +41,6 @@ def background():
 				    ),
 				)
 		except Exception as e:
-			print(e)
+			print("Error" + str(e))
 		con.commit()
 		time.sleep(10)
