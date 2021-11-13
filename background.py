@@ -5,6 +5,7 @@ import datetime
 import sqlite3
 import time
 
+
 def background():
 	# Crating the database and table
 	con = sqlite3.connect("cricket.db")
@@ -14,8 +15,10 @@ def background():
 	)
 	# Getting the data from the API
 	api_key = os.environ['YOUTUBE_API_KEY']
-	url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=cricket&type=video&maxResults=10&order=date&key={}".format(
-	    api_key)
+	url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=cricket&type=video&maxResults=10&order=date&publishedAfter={}&key={}".format(
+	    (datetime.datetime.today() - datetime.timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%SZ'),
+	    api_key,
+	)
 	while True:
 		try:
 			response = requests.get(url)
