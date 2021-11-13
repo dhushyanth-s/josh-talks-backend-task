@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 import datetime
@@ -12,7 +13,7 @@ def background():
 	    "CREATE TABLE IF NOT EXISTS videos (id TEXT NOT NULL PRIMARY KEY, title TEXT, channel_id TEXT, channel_title TEXT, published_at TIMESTAMP, description TEXT, thumbnail TEXT)"
 	)
 	# Getting the data from the API
-	api_key = "AIzaSyB8ZlLq6r15oqWCGdA_NyVgOzB7MJWKSFc"
+	api_key = os.environ['YOUTUBE_API_KEY']
 	url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=cricket&type=video&maxResults=10&order=date&key={}".format(
 	    api_key)
 	while True:
